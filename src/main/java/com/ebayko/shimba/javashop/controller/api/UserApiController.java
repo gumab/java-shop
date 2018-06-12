@@ -3,6 +3,7 @@ package com.ebayko.shimba.javashop.controller.api;
 import com.ebayko.shimba.javashop.domain.Cart;
 import com.ebayko.shimba.javashop.domain.Item;
 import com.ebayko.shimba.javashop.domain.User;
+import com.ebayko.shimba.javashop.dto.MyHeader;
 import com.ebayko.shimba.javashop.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 @RestController
 @RequestMapping("/api/users")
@@ -20,9 +22,12 @@ public class UserApiController {
     UserService userService;
 
     @GetMapping(path = "/{userId}")
-    public User getUser(@PathVariable("userId") Long userId) {
-
-        return userService.getUser(userId);
+    public User getUser(MyHeader myHeader, @PathVariable("userId") Long userId) {
+        System.out.println(myHeader.getAccept());
+        System.out.println(myHeader.getHost());
+        User result = userService.getUser(userId);
+        return result;
+        //return new User(1L, "test", "test@test.com", "1234", LocalDateTime.now(), new ArrayList<>());
     }
 
     @GetMapping(path = "/test")

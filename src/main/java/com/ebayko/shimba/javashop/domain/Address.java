@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "user")
+@Table(name = "address")
 @Getter
 @Setter
 public class Address implements Serializable {

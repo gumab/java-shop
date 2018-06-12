@@ -1,7 +1,8 @@
 package com.ebayko.shimba.javashop.domain;
 
-import lombok.Getter;
-import lombok.Setter;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -13,6 +14,8 @@ import java.util.List;
 @Table(name = "user")
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,6 +27,7 @@ public class User implements Serializable {
     @Column(name = "reg_date")
     private LocalDateTime regDate;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "buyer", cascade = CascadeType.ALL)
     private List<Cart> cartList = new ArrayList<>();
 
