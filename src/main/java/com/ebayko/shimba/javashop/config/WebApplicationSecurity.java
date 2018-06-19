@@ -28,21 +28,31 @@ public class WebApplicationSecurity extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .logout()
-                .logoutRequestMatcher(
-                        new AntPathRequestMatcher("/logout"))
-                .logoutSuccessUrl("/").and()
+                    .logoutRequestMatcher(
+                            new AntPathRequestMatcher("/logout"))
+                        .logoutSuccessUrl("/").and()
                 .authorizeRequests()
-                .antMatchers("/").permitAll()
-                .antMatchers("/members/joinform").permitAll()
-                .antMatchers("/members/join").permitAll()
-                .antMatchers("/h2-console/**").permitAll()
-                .antMatchers("/members/**").hasRole("USER")
-                .antMatchers("/api/**").hasRole("USER")
-                .and()
-                .csrf().ignoringAntMatchers("/**")
+                    .antMatchers("/").permitAll()
+                    .antMatchers("/members/joinform").permitAll()
+                    .antMatchers(HttpMethod.POST,
+                            "/members/join").permitAll()
+                    .antMatchers("/members/welcome").permitAll()
+                    .antMatchers("/members/login").permitAll()
+                    .antMatchers("/members/**").hasRole("USER")
+                    .antMatchers(HttpMethod.GET,"/boards").permitAll()
+                    .antMatchers(HttpMethod.POST,"/boards").hasRole("USER")
+                    .antMatchers("/boards/**").hasRole("USER")
+                    .antMatchers("/api/**").hasRole("USER")
+                    .antMatchers("/h2-console/**").permitAll()
+                    .anyRequest().fullyAuthenticated()
                 .and().headers().frameOptions().disable()
                 .and()
-                .formLogin();//Post방식으로 데이터 넘길때 검증등의 처리하는걸 무시함
-
+                    .csrf().ignoringAntMatchers("/**")// post방식으로 값을 전달할 때 csrf를 무시
+                .and()
+                .formLogin()
+                    .loginProcessingUrl("/members/login")
+                    .loginPage("/members/login")
+                    .usernameParameter("id")
+                    .passwordParameter("password");
     }
 }

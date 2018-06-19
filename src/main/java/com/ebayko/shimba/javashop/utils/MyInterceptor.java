@@ -20,8 +20,8 @@ public class MyInterceptor extends HandlerInterceptorAdapter {
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
         long endTime = System.currentTimeMillis();
-        long startTime = (long) request.getAttribute("startTime");
-        System.out.println(endTime - startTime);
+        long startTime = (long)request.getAttribute("startTime");
+        System.out.println("endTime - startTime : " + (endTime - startTime));
         System.out.println("postHandle :" + request.getRequestURI());
     }
 }
