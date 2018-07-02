@@ -17,7 +17,7 @@ public class MemberRole {
     private String name;
 
     // MemberRole이 영속화될 때, Member도 영속화 시킨다. cascade = CascadeType.ALL
-    @JsonBackReference
+    @JsonBackReference(value = "membermemberrole")
     @ManyToOne(targetEntity = Member.class)
     @JoinColumn(name = "member_id")
     private Member member;

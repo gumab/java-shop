@@ -24,7 +24,7 @@ public class Member implements Serializable {
     private LocalDateTime regdate;
 
     // Member가 영속성을 가질때 memberRoles도 영속성을 가지도록 한다.
-    @JsonManagedReference
+    @JsonManagedReference(value = "membermemberrole")
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private List<MemberRole> memberRoles = new ArrayList<>();
 
@@ -43,11 +43,11 @@ public class Member implements Serializable {
         }
     }
 
-    @JsonManagedReference
+    @JsonManagedReference(value = "membercart")
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private List<Cart> cartList = new ArrayList<>();
-//
-//    @JsonManagedReference
-//    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
-//    private List<MyOrder> orderList = new ArrayList<>();
+
+    @JsonManagedReference(value = "memberorder")
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
+    private List<MyOrder> orderList = new ArrayList<>();
 }

@@ -23,20 +23,20 @@ public class Cart implements Serializable {
     @JoinColumn(name = "item_id")
     private Item item;
 
-    @JsonBackReference
+    @JsonBackReference(value = "membercart")
     @ManyToOne(targetEntity = Member.class)
     @JoinColumn(name = "member_id")
     private Member member;
 
     @Column(name = "reg_date")
     private LocalDateTime regdate;
-//
-//    @JsonBackReference
-//    @ManyToOne(targetEntity = MyOrder.class)
-//    @JoinColumn(name = "order_id")
-//    private MyOrder myOrder;
-//
-//    public boolean isOrdered() {
-//        return myOrder != null;
-//    }
+
+    @JsonBackReference(value = "ordercart")
+    @ManyToOne(targetEntity = MyOrder.class)
+    @JoinColumn(name = "order_id")
+    private MyOrder myOrder;
+
+    public boolean isOrdered() {
+        return false;
+    }
 }

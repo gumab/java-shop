@@ -19,7 +19,7 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    @Transactional(readOnly = true)
+    @Transactional
     public Cart getCart(Long id) {
         return cartRepository.getOne(id);
     }
