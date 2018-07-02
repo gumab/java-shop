@@ -18,6 +18,9 @@ public class ServiceMonitor {
         System.out.println("----------------------------------");
         System.out.println(joinPoint.getSignature().getName());
         System.out.println(joinPoint.getTarget().getClass().getName());
+        for(Object arg: joinPoint.getArgs()){
+            System.out.println(arg);
+        }
         System.out.println("----------------------------------");
     }
 

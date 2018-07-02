@@ -40,4 +40,9 @@ public class MemberController {
     public String welcome() {
         return "members/welcome";
     }
+
+    @GetMapping(path = "/login")
+    public String loginForm() {
+        return "members/loginForm";
+    }
 }

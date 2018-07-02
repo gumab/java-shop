@@ -27,16 +27,6 @@ public class MemberApiController {
         //return new Member(1L, "test", "test@test.com", "1234", LocalDateTime.now(), new ArrayList<>());
     }
 
-    @GetMapping(path = "/test")
-    public Member test() {
-        Member newMember = new Member();
-        newMember.setPasswd("1234");
-        newMember.setName("chabae");
-        newMember.setEmail("chabae@ebay.com");
-        newMember.setRegdate(LocalDateTime.now());
 
-        memberService.addMember(newMember);
 
-        return null;
-    }
 }
