@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>list</title>
+</head>
+<body>
+<h1>list</h1>
+
+<table>
+    <thead>
+    <tr>
+        <th width="10%">id</th>
+        <th>상품명</th>
+        <th width="15%">수량</th>
+        <th width="10%">가격</th>
+        <th width="15%">담은날짜</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:if="${not #lists.isEmpty(cartList)}" th:each="cart : ${cartList}">
+        <td th:text="${cart.id}"></td>
+        <td th:text="${cart.item.name}"></td>
+        <td th:text="${cart.quantity}"></td>
+        <td th:text="${cart.item.price}"></td>
+        <td th:text="${#temporals.format(cart.regdate, 'yyyy/MM/dd HH:mm')}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

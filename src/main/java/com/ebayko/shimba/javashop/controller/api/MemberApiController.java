@@ -26,7 +26,4 @@ public class MemberApiController {
         return result;
         //return new Member(1L, "test", "test@test.com", "1234", LocalDateTime.now(), new ArrayList<>());
     }
-
-
-
 }

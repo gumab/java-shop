@@ -36,6 +36,13 @@ public class Member implements Serializable {
         }
     }
 
+    public void addCart(Cart cart) {
+        cartList.add(cart);
+        if (cart.getMember() != this) {
+            cart.setMember(this);
+        }
+    }
+
     @JsonManagedReference
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private List<Cart> cartList = new ArrayList<>();
