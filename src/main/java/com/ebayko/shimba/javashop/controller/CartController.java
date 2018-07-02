@@ -32,9 +32,9 @@ public class CartController {
 
         List<Cart> result = new ArrayList<>();
         for(Cart cart:member.getCartList()){
-            if(!cart.isOrdered()){
+            //if(!cart.isOrdered()){
                 result.add(cart);
-            }
+            //}
         }
 
         modelMap.addAttribute("cartList", result);
