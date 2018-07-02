@@ -46,4 +46,8 @@ public class Member implements Serializable {
     @JsonManagedReference
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private List<Cart> cartList = new ArrayList<>();
+
+    @JsonManagedReference
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
+    private List<MyOrder> orderList = new ArrayList<>();
 }

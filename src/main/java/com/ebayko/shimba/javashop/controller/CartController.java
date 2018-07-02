@@ -1,6 +1,7 @@
 package com.ebayko.shimba.javashop.controller;
 
 import com.ebayko.shimba.javashop.domain.Board;
+import com.ebayko.shimba.javashop.domain.Cart;
 import com.ebayko.shimba.javashop.domain.Member;
 import com.ebayko.shimba.javashop.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @RequestMapping("/cart")
@@ -26,7 +29,15 @@ public class CartController {
                            ModelMap modelMap
     ) {
         Member member = memberService.getMemberByEmail(principal.getName());
-        modelMap.addAttribute("cartList", member.getCartList());
+
+        List<Cart> result = new ArrayList<>();
+        for(Cart cart:member.getCartList()){
+            if(!cart.isOrdered()){
+                result.add(cart);
+            }
+        }
+
+        modelMap.addAttribute("cartList", result);
         return "cart/list";
     }
 }

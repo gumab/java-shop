@@ -8,6 +8,6 @@ public class MainController {
     // templates/main.html 을 작성해야한다.
     @GetMapping(path="/")
     public String main(){
-        return "main";
+        return "redirect:/items";
     }
 }

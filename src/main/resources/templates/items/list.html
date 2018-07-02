@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity" layout:decorator="layout/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>item list</title>
+    <script>
+        function addCart(itemId) {
+            $.ajax({
+                url:'/api/cart',
+                data:JSON.stringify({
+                    item:{
+                        id:itemId
+                    },
+                    quantity:1
+                }),
+                contentType: "application/json",
+                dataType:'json',
+                method:'post',
+                success:function (data) {
+                    if(data && data.item){
+                        alert(data.item.name + ' 담기 성공')
+                    }
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+
+<section layout:fragment="content">
+<h1>item list</h1>
+<table>
+    <thead>
+    <tr>
+        <th>id</th>
+        <th>상품명</th>
+        <th>가격</th>
+        <th>이미지</th>
+        <th>등록일</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:if="${not #lists.isEmpty(itemPage)}" th:each="item : ${itemPage}">
+        <td th:text="${item.id}"></td>
+        <td th:text="${item.name}"></td>
+        <td th:text="${item.price}"></td>
+        <td>
+            <img height="100px" th:src="${item.imageUrl}">
+        </td>
+        <td th:text="${#temporals.format(item.regdate, 'yyyy/MM/dd HH:mm')}"></td>
+        <td>
+            <button th:onclick="'addCart('+${item.id}+')'">담기</button>
+        </td>
+    </tr>
+    </tbody>
+    <a th:if="${not itemPage.first}" th:href="@{'/items/' + ${itemPage.number-1}}">이전페이지</a>
+    <a th:if="${not itemPage.last}" th:href="@{'/items/' + ${itemPage.number+1}}">다음페이지</a>
+</table>
+</section>
+</body>
+</html>

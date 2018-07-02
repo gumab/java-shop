@@ -1,8 +1,10 @@
 package com.ebayko.shimba.javashop.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -30,7 +32,7 @@ public class WebApplicationSecurity extends WebSecurityConfigurerAdapter {
                 .logout()
                     .logoutRequestMatcher(
                             new AntPathRequestMatcher("/logout"))
-                        .logoutSuccessUrl("/").and()
+                        .logoutSuccessUrl("/members/login").and()
                 .authorizeRequests()
                     .antMatchers("/").permitAll()
                     .antMatchers("/members/joinform").permitAll()

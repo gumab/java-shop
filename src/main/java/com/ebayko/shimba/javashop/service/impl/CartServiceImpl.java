@@ -17,4 +17,10 @@ public class CartServiceImpl implements CartService {
     public Cart addCart(Cart cart) {
         return cartRepository.save(cart);
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Cart getCart(Long id) {
+        return cartRepository.getOne(id);
+    }
 }

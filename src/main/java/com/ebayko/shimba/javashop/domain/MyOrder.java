@@ -1,27 +1,27 @@
 package com.ebayko.shimba.javashop.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
-@Table(name = "cart")
+@Table(name = "myOrder")
 @Getter
 @Setter
-public class Cart implements Serializable {
+public class MyOrder implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Integer quantity;
-
-    @ManyToOne(targetEntity = Item.class)
-    @JoinColumn(name = "item_id")
-    private Item item;
+    @JsonManagedReference
+    @OneToMany(mappedBy = "myOrder", cascade = CascadeType.ALL)
+    private List<Cart> cartList;
 
     @JsonBackReference
     @ManyToOne(targetEntity = Member.class)
@@ -30,13 +30,4 @@ public class Cart implements Serializable {
 
     @Column(name = "reg_date")
     private LocalDateTime regdate;
-
-    @JsonBackReference
-    @ManyToOne(targetEntity = MyOrder.class)
-    @JoinColumn(name = "order_id")
-    private MyOrder myOrder;
-
-    public boolean isOrdered() {
-        return myOrder != null;
-    }
 }
