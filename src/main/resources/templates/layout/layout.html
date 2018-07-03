@@ -5,24 +5,31 @@
     <head>
         <title>Layout page</title>
         <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" >
         <script
                 src="https://code.jquery.com/jquery-1.12.4.min.js"
                 integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
                 crossorigin="anonymous"></script>
+        <style>
+            header a{
+                color: #000;
+                margin-right:20px;
+            }
+        </style>
     </head>
     <body>
         <div class="container">
-            <header>
+            <header style="margin-top:20px;margin-bottom:30px">
                 <h1>심바몰</h1>
-                <a href="/items">상품보기</a>
-                <a href="/cart">장바구니</a>
-                <a href="/order">주문내역</a>
+                <a href="/items" title="상품보기"><i class="fas fa-sitemap"></i></a>
+                <a href="/cart" title="장바구니"><i class="fas fa-shopping-cart"></i></a>
+                <a href="/order" title="주문내역"><i class="fas fa-clipboard-list"></i></a>
+                <a onclick="return confirm('로그아웃 하시겠습니까?')" href="/logout" title="로그아웃"><i class="fas fa-sign-out-alt"></i></a>
             </header>
             <section layout:fragment="content">
             </section>
             <footer>
                 <p layout:fragment="custom-footer"></p>
-                <a href="/logout">로그아웃</a>
             </footer>
         </div>
     </body>
