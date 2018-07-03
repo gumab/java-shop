@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.security.Principal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 @Controller
@@ -36,6 +37,8 @@ public class CartController {
                 result.add(cart);
             }
         }
+
+        result.sort(Comparator.comparingLong(Cart::getId).reversed());
 
         modelMap.addAttribute("cartList", result);
         return "cart/list";
