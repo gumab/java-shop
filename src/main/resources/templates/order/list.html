@@ -10,6 +10,14 @@
 
 <section layout:fragment="content">
     <h2>주문내역</h2>
+    <div class="row">
+        <div class="col-md-6">
+            <a th:if="${not orderPage.first}" th:href="@{'/items/' + ${orderPage.number-1}}">이전페이지</a>
+        </div>
+        <div class="col-md-6" style="text-align:right">
+            <a th:if="${not orderPage.last}" th:href="@{'/items/' + ${orderPage.number+1}}">다음페이지</a>
+        </div>
+    </div>
     <table class="table">
         <thead>
         <tr>
@@ -22,7 +30,7 @@
             <th></th>
         </tr>
         </thead>
-        <tbody th:if="${not #lists.isEmpty(orderList)}" th:each="order : ${orderList}">
+        <tbody th:if="${not #lists.isEmpty(orderPage)}" th:each="order : ${orderPage}">
         <tr th:if="${not #lists.isEmpty(order.cartList)}" th:each="cart, index : ${order.cartList}">
             <td th:if="${index.index==0}" th:rowspan="${order.cartList.size()}" th:text="${order.id}"></td>
             <td th:text="${cart.item.name}"></td>
@@ -36,6 +44,14 @@
         </tr>
         </tbody>
     </table>
+    <div class="row">
+        <div class="col-md-6">
+            <a th:if="${not orderPage.first}" th:href="@{'/items/' + ${orderPage.number-1}}">이전페이지</a>
+        </div>
+        <div class="col-md-6" style="text-align:right">
+            <a th:if="${not orderPage.last}" th:href="@{'/items/' + ${orderPage.number+1}}">다음페이지</a>
+        </div>
+    </div>
 </section>
 </body>
 </html>
