@@ -1,6 +1,7 @@
 package com.ebayko.shimba.javashop.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -37,6 +38,6 @@ public class Cart implements Serializable {
     private MyOrder myOrder;
 
     public boolean isOrdered() {
-        return false;
+        return myOrder != null;
     }
 }

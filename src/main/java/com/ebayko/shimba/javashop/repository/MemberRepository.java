@@ -14,7 +14,7 @@ public interface MemberRepository
     @Query("select distinct m from Member m join fetch m.memberRoles")
     public List<Member> getMembers();
 
-    @Query("select m from Member m join fetch m.memberRoles where m.id = :id")
+    @Query("select m from Member m where m.id = :id")
     public Member getMember(@Param("id") Long id);
 
     public Member getMemberByEmail(String email);

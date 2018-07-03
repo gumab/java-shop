@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity" layout:decorator="layout/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>order list</title>
+</head>
+<body>
+
+<section layout:fragment="content">
+    <h2>주문내역</h2>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>주문번호</th>
+            <th>상품명</th>
+            <th>상품이미지</th>
+            <th>수량</th>
+            <th>가격</th>
+            <th>주문일</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody th:if="${not #lists.isEmpty(orderList)}" th:each="order : ${orderList}">
+        <tr th:if="${not #lists.isEmpty(order.cartList)}" th:each="cart, index : ${order.cartList}">
+            <td th:if="${index.index==0}" th:rowspan="${order.cartList.size()}" th:text="${order.id}"></td>
+            <td th:text="${cart.item.name}"></td>
+            <td>
+                <img height="100px" th:src="${cart.item.imageUrl}">
+            </td>
+            <td th:text="${cart.quantity}"></td>
+            <td th:text="${cart.item.price * cart.quantity}"></td>
+            <td th:if="${index.index==0}" th:rowspan="${order.cartList.size()}"
+                th:text="${#temporals.format(order.regdate, 'yyyy/MM/dd HH:mm')}"></td>
+        </tr>
+        </tbody>
+    </table>
+</section>
+</body>
+</html>

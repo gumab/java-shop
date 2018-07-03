@@ -37,4 +37,9 @@ public class CartApiController {
         cartService.addCart(cart);
         return cart;
     }
+
+    @GetMapping("/{id}")
+    public Cart getCart(@PathVariable("id") Long id) {
+        return cartService.getCart(id);
+    }
 }

@@ -17,4 +17,10 @@ public class OrderServiceImpl implements OrderService {
     public MyOrder addOrder(MyOrder order) {
         return orderRepository.save(order);
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public MyOrder getOrder(Long id) {
+        return orderRepository.getMyOrder(id);
+    }
 }

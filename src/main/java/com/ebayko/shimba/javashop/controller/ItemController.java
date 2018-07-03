@@ -28,7 +28,7 @@ public class ItemController {
     public String itemList(@PathVariable(name = "pageId", required = false) int pageId,
                            ModelMap modelMap
     ) {
-        PageRequest pageRequest = PageRequest.of(pageId, 3, Sort.Direction.DESC, "price");
+        PageRequest pageRequest = PageRequest.of(pageId, 5);//, Sort.Direction.DESC, "price");
         Page<Item> itemPage = itemService.getItems(pageRequest);
         modelMap.addAttribute("itemPage", itemPage);
         return "items/list";

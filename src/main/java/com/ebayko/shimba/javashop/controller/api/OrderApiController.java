@@ -46,4 +46,9 @@ public class OrderApiController {
 
         return order;
     }
+
+    @GetMapping("/{id}")
+    public MyOrder getOrder(@PathVariable("id") Long id) {
+        return orderService.getOrder(id);
+    }
 }

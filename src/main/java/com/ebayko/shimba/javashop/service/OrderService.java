@@ -4,4 +4,6 @@ import com.ebayko.shimba.javashop.domain.MyOrder;
 
 public interface OrderService {
     public MyOrder addOrder(MyOrder order);
+
+    public MyOrder getOrder(Long id);
 }
